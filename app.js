@@ -3,9 +3,12 @@ import express from "express";
 import cors from "cors";
 import  bodyParser from "body-parser";
 import userRouter from "./src/Routes/User/user.js";
+import * as dotenv from 'dotenv'
 
+dotenv.config()
+const urlDB = process.env.DB_URL;
 mongoose.set('strictQuery', false);
-mongoose.connect("mongodb+srv://eldad5900:eldad5900@cluster0.l37cp20.mongodb.net/test", () => console.log("API Connected to MongoDB"));
+mongoose.connect(urlDB, () => console.log("API Connected to MongoDB"));
 const db = mongoose.connection;
 db.on("error", (error) => {
   console.log(error);
